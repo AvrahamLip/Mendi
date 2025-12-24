@@ -6,7 +6,8 @@ document.addEventListener('DOMContentLoaded', () => {
         height: 2.1,
         leafType: 'single',
         profit: 30,
-        selectedOptionals: new Set() // Store IDs of selected optional items
+        selectedOptionals: new Set(), // Store IDs of selected optional items
+        customQuantities: {} // Store overrides for quantities
     };
 
     // DOM Elements
@@ -81,7 +82,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // We show all items, but only calculate if selected
                 const formula = leafType === 'single' ? item.formulaSingle : item.formulaDouble;
-                const quantity = evaluateFormula(formula, width, height);
+                const formulaResult = evaluateFormula(formula, width, height);
+
+                // Use custom quantity if set, otherwise use formula result
+                const quantity = state.customQuantities[item.id] !== undefined ?
+                    state.customQuantities[item.id] : formulaResult;
+
                 const itemTotal = quantity * item.price;
 
                 if (isSelected) {
@@ -99,7 +105,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         </td>
                         <td>${item.name}</td>
                         <td><small>${item.manufacturer}</small></td>
-                        <td>${quantity.toFixed(2)}</td>
+                        <td>
+                            <input type="number" 
+                                   class="qty-input" 
+                                   data-id="${item.id}" 
+                                   value="${quantity.toFixed(2)}" 
+                                   step="0.01" 
+                                   min="0">
+                        </td>
                         <td>${item.unit}</td>
                         <td>${item.price}${calculatorConfig.currency}</td>
                         <td class="highlight-price">${isSelected ? itemTotal.toFixed(2) : '0.00'}${calculatorConfig.currency}</td>
@@ -135,6 +148,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     state.selectedOptionals.delete(id);
                 }
+                calculate();
+            });
+        });
+
+        // Add event listeners to quantity inputs
+        document.querySelectorAll('.qty-input').forEach(input => {
+            input.addEventListener('change', (e) => {
+                const id = e.target.dataset.id;
+                state.customQuantities[id] = parseFloat(e.target.value) || 0;
+                calculate();
+            });
+            input.addEventListener('input', (e) => {
+                const id = e.target.dataset.id;
+                state.customQuantities[id] = parseFloat(e.target.value) || 0;
                 calculate();
             });
         });
