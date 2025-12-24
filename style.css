@@ -25,8 +25,14 @@ body {
     background: var(--bg-gradient);
     color: var(--text-main);
     min-height: 100vh;
-    padding: 20px;
+    padding: 10px;
     line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+    body {
+        padding: 20px;
+    }
 }
 
 .app-container {
@@ -37,10 +43,20 @@ body {
 /* Header */
 .app-header {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 2rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
     padding: 1rem 0;
+}
+
+@media (min-width: 768px) {
+    .app-header {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: right;
+    }
 }
 
 .header-content h1 {
@@ -81,9 +97,14 @@ body {
     gap: 2rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 1024px) {
     .main-layout {
         grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+        margin-bottom: 1.5rem;
     }
 }
 
@@ -225,6 +246,7 @@ body {
 .table-container {
     margin-bottom: 2rem;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .table-container h2 {
@@ -238,6 +260,7 @@ body {
 
 table {
     width: 100%;
+    min-width: 600px;
     border-collapse: collapse;
     background: white;
     border-radius: 8px;
@@ -246,9 +269,19 @@ table {
 
 th,
 td {
-    padding: 12px 15px;
+    padding: 10px 8px;
     text-align: right;
     border-bottom: 1px solid var(--border);
+    font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+
+    th,
+    td {
+        padding: 12px 15px;
+        font-size: 1rem;
+    }
 }
 
 th {
@@ -294,11 +327,12 @@ tr:hover td {
     background: var(--primary);
     color: white;
     border: none;
-    padding: 12px 24px;
+    padding: 14px 24px;
     border-radius: 8px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 700;
     width: 100%;
+    font-size: 1.1rem;
 }
 
 /* Animations */
