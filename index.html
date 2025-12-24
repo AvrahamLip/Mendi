@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון דלתות אש מקצועי</title>
+    <meta name="description" content="מחשבון מתקדם לחישוב עלויות ייצור והרכבה של דלתות אש, מבוסס נתונים דינמיים.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200;300;400;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <header class="app-header">
+            <div class="header-content">
+                <h1 id="app-title">מחשבון דלתות אש</h1>
+                <p id="app-subtitle" class="subtitle">טוען נתונים...</p>
+            </div>
+        </header>
+
+        <main class="main-layout">
+            <!-- Sidebar: Inputs and Summary -->
+            <aside class="sidebar card">
+                <section class="input-group">
+                    <h3>מפרט דלת</h3>
+                    <div class="input-field">
+                        <label for="width">רוחב (מטר)</label>
+                        <input type="number" id="width" value="1.0" step="0.1" min="0.5" max="3.0">
+                    </div>
+                    <div class="input-field">
+                        <label for="height">גובה (מטר)</label>
+                        <input type="number" id="height" value="2.1" step="0.1" min="1.0" max="4.0">
+                    </div>
+                    <div class="toggle-group">
+                        <label>סוג דלת</label>
+                        <div class="radio-toggle">
+                            <input type="radio" id="single-leaf" name="leaf-type" value="single" checked>
+                            <label for="single-leaf">כנף אחת</label>
+                            <input type="radio" id="double-leaf" name="leaf-type" value="double">
+                            <label for="double-leaf">כנף כפולה</label>
+                        </div>
+                    </div>
+                    <div class="input-field">
+                        <label for="profit">אחוז רווח (%)</label>
+                        <input type="number" id="profit" value="30" min="0" max="500">
+                    </div>
+                </section>
+
+                <section class="summary-box">
+                    <div class="total-cost">
+                        <span class="label">סה"כ מחיר ללקוח:</span>
+                        <div class="value-container">
+                            <span id="final-price">0</span>
+                            <span class="currency">₪</span>
+                        </div>
+                    </div>
+                    <div class="cost-stats">
+                        <div class="stat">
+                            <span>עלות חומרים:</span>
+                            <span id="material-cost">0</span>
+                        </div>
+                        <div class="stat">
+                            <span>עלות עבודה:</span>
+                            <span id="labor-cost">0</span>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+
+            <!-- Content: Detailed Breakdown -->
+            <div class="content">
+                <div id="breakdown-container">
+                    <!-- Tables will be injected here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script type="module" src="script.js"></script>
+</body>
+
+</html>
